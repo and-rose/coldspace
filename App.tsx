@@ -1,8 +1,14 @@
-import {
-    Provider as PaperProvider,
-    MD3LightTheme as DefaultTheme,
-} from "react-native-paper";
 import * as React from "react";
+import {
+    DarkTheme as NavigationDarkTheme,
+    DefaultTheme as NavigationDefaultTheme,
+} from "@react-navigation/native";
+import {
+    MD3DarkTheme as PaperDarkTheme,
+    MD3LightTheme as PaperDefaultTheme,
+    Provider as PaperProvider,
+} from "react-native-paper";
+import merge from "deepmerge";
 import {
     getFocusedRouteNameFromRoute,
     NavigationContainer,
@@ -14,13 +20,18 @@ import {
 import BottomTabs from "./src/navigation/BottomTabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
+const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
+
 const theme = {
-    ...DefaultTheme,
+    ...CombinedDefaultTheme,
     roundness: 1,
     version: 3,
     colors: {
-        ...DefaultTheme.colors,
+        ...CombinedDefaultTheme.colors,
         primary: "#A2D2FF",
+        primaryContainer: "#A2D2FF",
+        surfaceVariant: "#A2D2FF",
+        surface: "#FFFFFF",
         secondary: "#FFC8DD",
         error: "#fa7676",
         warning: "#ffc46b",
@@ -40,7 +51,7 @@ export default function App() {
 
     return (
         <PaperProvider theme={theme}>
-            <NavigationContainer>
+            <NavigationContainer theme={theme}>
                 <Stack.Navigator initialRouteName="Coldspace">
                     <Stack.Screen
                         name="Coldspace"

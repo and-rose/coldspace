@@ -23,10 +23,16 @@ const ExpiringScreen = () => {
         "fig",
         "grape",
         "honey",
+        "milk",
+        "orange",
+        "pear",
+        "pineapple",
+        "strawberry",
+        "tomato",
     ];
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView>
             <ScrollView
                 contentContainerStyle={{
                     justifyContent: "center",

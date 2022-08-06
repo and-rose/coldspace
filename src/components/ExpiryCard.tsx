@@ -1,13 +1,6 @@
 import React from "react";
-import {
-    Avatar,
-    Card,
-    List,
-    Paragraph,
-    useTheme,
-    Text,
-} from "react-native-paper";
-import { SafeAreaView, View, ScrollView, StyleSheet } from "react-native";
+import { Avatar, Card, List, useTheme, Text } from "react-native-paper";
+import { View, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     cardCircle: {
@@ -86,7 +79,7 @@ function ExpiryCard(props: { food: string }) {
     }
 
     return (
-        <Card key={props.food} elevation={2} style={styles.cardCircle}>
+        <Card key={props.food} elevation={1} style={styles.cardCircle}>
             <Card.Title
                 title={props.food}
                 titleVariant={"titleLarge"}

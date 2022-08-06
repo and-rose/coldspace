@@ -7,16 +7,9 @@ import {
     Platform,
     StatusBar,
     ScrollView,
+    RefreshControl,
 } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-
-const styles = StyleSheet.create({
-    cardCircle: {
-        borderRadius: 14,
-        margin: 10,
-        elevation: 2,
-    },
-});
+import CategoryTiles from "../components/CategoryTiles";
 
 const HomeScreen = () => {
     const Foods = [
@@ -28,10 +21,17 @@ const HomeScreen = () => {
         "fig",
         "grape",
         "honey",
+        "milk",
+        "orange",
+        "pear",
+        "pineapple",
+        "strawberry",
+        "tomato",
     ];
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
+            <CategoryTiles />
+            {/* <ScrollView>
                 {Foods.map((food) => (
                     <Card key={food} elevation={2} style={styles.cardCircle}>
                         <Card.Title
@@ -48,7 +48,7 @@ const HomeScreen = () => {
                         </Card.Content>
                     </Card>
                 ))}
-            </ScrollView>
+            </ScrollView> */}
         </SafeAreaView>
     );
 };
