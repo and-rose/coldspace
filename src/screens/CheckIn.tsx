@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import CameraOverlay from "../components/CameraOverlay";
 
 function CheckIn() {
     const [hasPermission, setHasPermission] = useState(false);
@@ -54,10 +56,12 @@ function CheckIn() {
 
     return (
         <View style={styles.container}>
+            <Text>Scan a barcode to check an item in!</Text>
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
             />
+            <CameraOverlay />
         </View>
     );
 }

@@ -57,8 +57,6 @@ const HomeScreen = () => {
 const FoodSpaces = () => {
     const theme = useTheme();
     const navigation = useNavigation<homeScreenProp>();
-    const [isLoading, setIsLoading] = React.useState(false);
-    const Stack = createStackNavigator<RootStackParamList>();
     const data = [
         "All",
         "Fruit",
