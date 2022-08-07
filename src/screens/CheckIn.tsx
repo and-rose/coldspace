@@ -19,14 +19,32 @@ function CheckIn() {
 
     const handleBarCodeScanned = ({ type, data }: BarCodeScannerResult) => {
         setScanned(true);
-        Alert.alert("Barcode Found!", `Type: ${type}\nData: ${data}`, [
-            {
-                text: "Cancel",
-                onPress: () => setScanned(false),
-                style: "cancel",
-            },
-            { text: "Add", onPress: () => setScanned(false) },
-        ]);
+        fetch(
+            "https://world.openfoodfacts.org/api/v0/product/" + data + ".json"
+        )
+            .then((response) => response.json())
+            .then((json) => {
+                Alert.alert(
+                    "Product Found!",
+                    `Type: ${type}\nData: ${data}\n[${json.product.brands}]: ${json.product.product_name}`,
+                    [
+                        {
+                            text: "Cancel",
+                            onPress: () => setScanned(false),
+                            style: "cancel",
+                        },
+                        { text: "Add", onPress: () => setScanned(false) },
+                    ]
+                );
+            })
+            .catch((error) => {
+                Alert.alert(
+                    "No Food Product Found!",
+                    `Type: ${type}\nData: ${data}\n[${error}]`,
+                    [{ text: "OK", onPress: () => setScanned(false) }]
+                );
+            })
+            .finally(() => {});
     };
 
     if (hasPermission === null) {
