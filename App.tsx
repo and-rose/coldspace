@@ -22,7 +22,6 @@ import {
 import Splash from "./src/screens/Splash";
 import CheckIn from "./src/screens/CheckIn";
 import Settings from "./src/screens/Settings";
-import { HeaderStyleInterpolators } from "@react-navigation/stack";
 
 const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
 

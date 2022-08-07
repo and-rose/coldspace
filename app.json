@@ -4,10 +4,10 @@
         "slug": "coldspace",
         "version": "0.1.0",
         "orientation": "portrait",
-        "icon": "./assets/icon.png",
+        "icon": "./assets/icon-coldspace.png",
         "userInterfaceStyle": "light",
         "splash": {
-            "image": "./assets/splash.png",
+            "image": "./assets/splash-coldspace.png",
             "resizeMode": "contain",
             "backgroundColor": "#ffffff"
         },
@@ -23,7 +23,7 @@
         "android": {
             "package": "com.androse.coldspace",
             "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
+                "foregroundImage": "./assets/adaptive-icon-coldspace.png",
                 "backgroundColor": "#FFFFFF"
             },
             "versionCode": 1
