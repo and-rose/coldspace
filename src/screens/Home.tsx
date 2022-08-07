@@ -1,5 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import {
+    createStackNavigator,
+    StackNavigationProp,
+    TransitionPresets,
+} from "@react-navigation/stack";
 import React from "react";
 import {
     SafeAreaView,
@@ -14,13 +18,47 @@ import {
 import { FAB, useTheme } from "react-native-paper";
 import { RootStackParamList } from "../../App";
 import CategoryTiles from "../components/CategoryTiles";
+import FoodDraw from "./FoodDraw";
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, "CheckIn">;
+export type HomeStackParamList = {
+    FoodDraw: undefined;
+    Categories: undefined;
+};
 
 const HomeScreen = () => {
     const theme = useTheme();
+    const Stack = createStackNavigator<HomeStackParamList>();
+
+    return (
+        <Stack.Navigator
+            initialRouteName="Categories"
+            screenOptions={{
+                headerTitleStyle: {
+                    color: theme.colors.text,
+                    fontFamily: "Roboto",
+                },
+            }}
+        >
+            <Stack.Screen
+                name="Categories"
+                component={FoodSpaces}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="FoodDraw"
+                component={FoodDraw}
+                options={{ ...TransitionPresets.SlideFromRightIOS }}
+            />
+        </Stack.Navigator>
+    );
+};
+
+const FoodSpaces = () => {
+    const theme = useTheme();
     const navigation = useNavigation<homeScreenProp>();
     const [isLoading, setIsLoading] = React.useState(false);
+    const Stack = createStackNavigator<RootStackParamList>();
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

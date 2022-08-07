@@ -26,6 +26,7 @@ const wait = (timeout: number) => {
 
 function CategoryTiles() {
     const theme = useTheme();
+    const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
@@ -51,7 +52,10 @@ function CategoryTiles() {
                     <Surface style={styles.surface}>
                         <TouchableRipple
                             rippleColor="rgba(0, 0, 0, .05)"
-                            onPress={() => console.log(`pressed${item}`)}
+                            onPress={() => {
+                                navigation.navigate("FoodDraw");
+                                console.log(`pressed${item}`);
+                            }}
                             style={{
                                 display: "flex",
                                 width: "100%",
