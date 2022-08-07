@@ -59,10 +59,19 @@ const FoodSpaces = () => {
     const navigation = useNavigation<homeScreenProp>();
     const [isLoading, setIsLoading] = React.useState(false);
     const Stack = createStackNavigator<RootStackParamList>();
+    const data = [
+        "All",
+        "Fruit",
+        "Vegetable",
+        "Meat",
+        "Fish",
+        "Dairy",
+        "Bread",
+    ];
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <CategoryTiles />
+            <CategoryTiles data={data} />
             <FAB
                 icon="barcode-scan"
                 style={styles.fab}

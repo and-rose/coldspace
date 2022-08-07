@@ -24,7 +24,7 @@ const wait = (timeout: number) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-function CategoryTiles() {
+function CategoryTiles(props: { data: any }) {
     const theme = useTheme();
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
@@ -38,15 +38,7 @@ function CategoryTiles() {
         <FlatGrid
             itemDimension={140}
             spacing={20}
-            data={[
-                "All",
-                "Fruit",
-                "Vegetable",
-                "Meat",
-                "Fish",
-                "Dairy",
-                "Bread",
-            ]}
+            data={props.data}
             renderItem={({ item }) => (
                 <View style={{ paddingTop: 2 }}>
                     <Surface style={styles.surface}>
