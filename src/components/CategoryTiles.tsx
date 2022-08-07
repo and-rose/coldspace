@@ -9,17 +9,11 @@ import { Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
 import { FlatGrid } from "react-native-super-grid";
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexWrap: "wrap",
-        marginTop: 8,
-        backgroundColor: "aliceblue",
-        maxHeight: 400,
-    },
     surface: {
         flex: 1,
         height: 180,
         borderRadius: 8,
+        backgroundColor: "#e7f3ff",
         alignItems: "center",
         justifyContent: "center",
     },

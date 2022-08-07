@@ -1,24 +1,18 @@
 import * as React from "react";
+import { DefaultTheme as NavigationDefaultTheme } from "@react-navigation/native";
 import {
-    DarkTheme as NavigationDarkTheme,
-    DefaultTheme as NavigationDefaultTheme,
-} from "@react-navigation/native";
-import {
-    MD3DarkTheme as PaperDarkTheme,
     MD3LightTheme as PaperDefaultTheme,
     Provider as PaperProvider,
+    Text,
 } from "react-native-paper";
 import merge from "deepmerge";
 import {
     getFocusedRouteNameFromRoute,
     NavigationContainer,
-    Route,
-    useNavigation,
-    useNavigationState,
-    useRoute,
 } from "@react-navigation/native";
 import BottomTabs from "./src/navigation/BottomTabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import Splash from "./src/screens/Splash";
 
 const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
 
@@ -29,10 +23,10 @@ const theme = {
     colors: {
         ...CombinedDefaultTheme.colors,
         primary: "#A2D2FF",
+        primaryAlt: "#52a7f7",
         primaryContainer: "#A2D2FF",
-        surfaceVariant: "#A2D2FF",
-        surface: "#FFFFFF",
         secondary: "#FFC8DD",
+        secondaryContainer: "#A2D2FF",
         error: "#fa7676",
         warning: "#ffc46b",
         tertiary: "#CDB4DB",
@@ -51,14 +45,21 @@ export default function App() {
 
     return (
         <PaperProvider theme={theme}>
-            <NavigationContainer theme={theme}>
-                <Stack.Navigator initialRouteName="Coldspace">
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Splash">
                     <Stack.Screen
                         name="Coldspace"
                         component={BottomTabs}
                         options={({ route }) => ({
                             headerTitle: getHeaderTitle(route),
                         })}
+                    />
+                    <Stack.Screen
+                        name="Splash"
+                        component={Splash}
+                        options={{
+                            headerShown: false,
+                        }}
                     />
                 </Stack.Navigator>
             </NavigationContainer>
