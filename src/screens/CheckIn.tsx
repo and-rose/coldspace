@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
-import { Camera, CameraType } from "expo-camera";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
-import { Button } from "react-native-paper";
 
 function CheckIn() {
     const [hasPermission, setHasPermission] = useState(false);
