@@ -3,7 +3,7 @@ import Home from "../screens/Home";
 import Recipes from "../screens/Recipes";
 import Expiring from "../screens/Expiring";
 import Profile from "../screens/Profile";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@juliushuck/react-native-navigation-material-bottom-tabs";
 import { useTheme } from "react-native-paper";
 
 const Tab = createMaterialBottomTabNavigator();
