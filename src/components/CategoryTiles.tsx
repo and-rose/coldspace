@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import {
     View,
     StyleSheet,
@@ -8,11 +8,12 @@ import {
 } from "react-native";
 import { Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
 import { FlatGrid } from "react-native-super-grid";
+import { FoodInfo } from "../screens/Home";
 
 const styles = StyleSheet.create({
     surface: {
         flex: 1,
-        height: 180,
+        width: 130,
         borderRadius: 8,
         backgroundColor: "#fff",
         alignItems: "center",
@@ -24,10 +25,31 @@ const wait = (timeout: number) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-function CategoryTiles(props: { data: any }) {
+function CategoryTiles(props: { data: any[] }) {
     const theme = useTheme();
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
+    const [categoryCounts, setCategoryCounts] = React.useState<{
+        [category: string]: number;
+    }>({});
+
+    useEffect(() => {
+        const uniqueCategories = [
+            ...new Set(props.data.map((a: { category: string }) => a.category)),
+        ];
+
+        const uniqueCategoriesCounts = uniqueCategories.reduce(
+            (acc: { [category: string]: number }, category: string) => {
+                acc[category] = props.data.filter(
+                    (a: { category: string }) => a.category === category
+                ).length;
+                return acc;
+            },
+            {}
+        );
+
+        setCategoryCounts(uniqueCategoriesCounts);
+    }, [props.data]);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -36,16 +58,16 @@ function CategoryTiles(props: { data: any }) {
 
     return (
         <FlatGrid
-            itemDimension={140}
-            spacing={20}
-            data={props.data}
+            itemDimension={110}
+            spacing={10}
+            horizontal={true}
+            data={Object.keys(categoryCounts)}
             renderItem={({ item }) => (
-                <View style={{ paddingTop: 2 }}>
+                <View style={{ paddingTop: 2, paddingLeft: 2 }}>
                     <Surface style={styles.surface}>
                         <TouchableRipple
                             rippleColor="rgba(0, 0, 0, .05)"
                             onPress={() => {
-                                navigation.navigate("FoodDraw");
                                 console.log(`pressed${item}`);
                             }}
                             style={{
@@ -66,7 +88,7 @@ function CategoryTiles(props: { data: any }) {
                                     variant="bodyMedium"
                                     style={{ color: theme.colors.outline }}
                                 >
-                                    {Math.floor(Math.random() * 10)} items
+                                    {categoryCounts[item]} items
                                 </Text>
                             </View>
                         </TouchableRipple>

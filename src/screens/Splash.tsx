@@ -11,7 +11,7 @@ const Splash = (props: any) => {
     useEffect(() => {
         setTimeout(() => {
             setAppIsReady(true);
-        }, 4500);
+        }, 1100);
     }, []);
 
     useEffect(() => {

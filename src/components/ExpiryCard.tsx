@@ -10,14 +10,13 @@ const styles = StyleSheet.create({
     },
 });
 
-function ExpiryCard(props: { food: string }) {
+function ExpiryCard(props: { food: string; expiry: Date }) {
     const { colors } = useTheme();
+    const timeDiff = props.expiry.getTime() - new Date().getTime();
+    const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
+
     const status =
-        Math.random() > 0.5
-            ? "nearing"
-            : Math.random() > 0.5
-            ? "expired"
-            : "close";
+        daysLeft > 5 ? "nearing" : daysLeft < 0 ? "expired" : "close";
     let icon: JSX.Element | null = null;
     let urgencyColor = colors.text;
 
@@ -30,7 +29,7 @@ function ExpiryCard(props: { food: string }) {
                         variant="labelMedium"
                         style={{ color: colors.outline }}
                     >
-                        5 days
+                        {daysLeft} days
                     </Text>
                     <List.Icon color={urgencyColor} icon="clock" />
                 </View>
@@ -45,7 +44,7 @@ function ExpiryCard(props: { food: string }) {
                         variant="labelMedium"
                         style={{ color: colors.outline }}
                     >
-                        5 days
+                        {daysLeft} days
                     </Text>
                     <List.Icon color={urgencyColor} icon="alert" />
                 </View>
@@ -60,7 +59,7 @@ function ExpiryCard(props: { food: string }) {
                         variant="labelMedium"
                         style={{ color: colors.outline }}
                     >
-                        5 days
+                        Expired
                     </Text>
                     <List.Icon color={urgencyColor} icon="close-circle" />
                 </View>
