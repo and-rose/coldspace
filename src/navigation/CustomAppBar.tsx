@@ -1,9 +1,9 @@
 import { Appbar } from "react-native-paper";
 
-function CustomAppBar() {
+function CustomAppBar(props: any) {
     return (
         <Appbar.Header>
-            <Appbar.Content title={"Duh"} />
+            <Appbar.Content title={props} />
         </Appbar.Header>
     );
 }

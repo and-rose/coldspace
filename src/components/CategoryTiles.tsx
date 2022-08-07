@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
     View,
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 180,
         borderRadius: 8,
-        backgroundColor: "#e7f3ff",
+        backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
     },
@@ -47,10 +48,10 @@ function CategoryTiles() {
             ]}
             renderItem={({ item }) => (
                 <View style={{ paddingTop: 2 }}>
-                    <Surface style={styles.surface} elevation={2}>
+                    <Surface style={styles.surface}>
                         <TouchableRipple
                             rippleColor="rgba(0, 0, 0, .05)"
-                            onPress={() => console.log("Pressed")}
+                            onPress={() => console.log(`pressed${item}`)}
                             style={{
                                 display: "flex",
                                 width: "100%",

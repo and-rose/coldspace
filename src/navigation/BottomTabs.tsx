@@ -9,16 +9,8 @@ import { useTheme } from "react-native-paper";
 const Tab = createMaterialBottomTabNavigator();
 
 export const BottomTabs = () => {
-    const theme = useTheme();
-
     return (
-        <Tab.Navigator
-            initialRouteName="Home"
-            shifting={true}
-            screenOptions={{
-                tabBarColor: theme.colors.primary,
-            }}
-        >
+        <Tab.Navigator initialRouteName="Home" shifting={true}>
             <Tab.Screen
                 name="Foodspace"
                 component={Home}

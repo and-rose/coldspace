@@ -14,4 +14,10 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
+    centerView: {
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
 });

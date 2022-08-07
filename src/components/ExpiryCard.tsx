@@ -8,12 +8,6 @@ const styles = StyleSheet.create({
         margin: 10,
         elevation: 2,
     },
-    cardCircleContent: {
-        flex: 1,
-        borderRadius: 100,
-        justifyContent: "center",
-        alignItems: "center",
-    },
 });
 
 function ExpiryCard(props: { food: string }) {

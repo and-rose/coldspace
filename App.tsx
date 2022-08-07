@@ -1,6 +1,10 @@
 import * as React from "react";
-import { DefaultTheme as NavigationDefaultTheme } from "@react-navigation/native";
 import {
+    DefaultTheme as NavigationDefaultTheme,
+    useNavigation,
+} from "@react-navigation/native";
+import {
+    IconButton,
     MD3LightTheme as PaperDefaultTheme,
     Provider as PaperProvider,
     Text,
@@ -11,8 +15,14 @@ import {
     NavigationContainer,
 } from "@react-navigation/native";
 import BottomTabs from "./src/navigation/BottomTabs";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+    createStackNavigator,
+    TransitionPresets,
+} from "@react-navigation/stack";
 import Splash from "./src/screens/Splash";
+import CheckIn from "./src/screens/CheckIn";
+import Settings from "./src/screens/Settings";
+import { HeaderStyleInterpolators } from "@react-navigation/stack";
 
 const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
 
@@ -40,18 +50,42 @@ function getHeaderTitle(route: any) {
     return getFocusedRouteNameFromRoute(route) ?? "Foodspace";
 }
 
+export type RootStackParamList = {
+    Coldspace: undefined;
+    CheckIn: undefined;
+    Splash: undefined;
+    Settings: undefined;
+};
+
 export default function App() {
-    const Stack = createStackNavigator();
+    const Stack = createStackNavigator<RootStackParamList>();
 
     return (
         <PaperProvider theme={theme}>
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName="Splash">
+            <NavigationContainer theme={theme}>
+                <Stack.Navigator
+                    initialRouteName="Splash"
+                    screenOptions={{
+                        headerTitleStyle: {
+                            color: theme.colors.text,
+                            fontFamily: "Roboto",
+                        },
+                    }}
+                >
                     <Stack.Screen
                         name="Coldspace"
                         component={BottomTabs}
-                        options={({ route }) => ({
+                        options={({ route, navigation }) => ({
                             headerTitle: getHeaderTitle(route),
+                            headerRight: () => (
+                                <IconButton
+                                    icon="cog"
+                                    size={20}
+                                    onPress={() =>
+                                        navigation.navigate("Settings")
+                                    }
+                                />
+                            ),
                         })}
                     />
                     <Stack.Screen
@@ -59,6 +93,23 @@ export default function App() {
                         component={Splash}
                         options={{
                             headerShown: false,
+                            ...TransitionPresets.ScaleFromCenterAndroid,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="CheckIn"
+                        component={CheckIn}
+                        options={{
+                            title: "Check In",
+                            ...TransitionPresets.SlideFromRightIOS,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Settings"
+                        component={Settings}
+                        options={{
+                            title: "Settings",
+                            ...TransitionPresets.SlideFromRightIOS,
                         }}
                     />
                 </Stack.Navigator>
