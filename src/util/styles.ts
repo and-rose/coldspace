@@ -1,10 +1,4 @@
-import {
-    SafeAreaView,
-    View,
-    StyleSheet,
-    Platform,
-    StatusBar,
-} from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {

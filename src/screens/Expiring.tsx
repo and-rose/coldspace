@@ -1,13 +1,5 @@
 import React from "react";
-import {
-    FlatList,
-    RefreshControl,
-    SafeAreaView,
-    ScrollView,
-    SectionList,
-} from "react-native";
-import { List } from "react-native-paper";
-import { Item } from "react-native-paper/lib/typescript/components/List/List";
+import { FlatList, SafeAreaView } from "react-native";
 import ExpiryCard from "../components/ExpiryCard";
 
 const wait = (timeout: number) => {

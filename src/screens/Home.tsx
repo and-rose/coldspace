@@ -1,25 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
-import {
-    createStackNavigator,
-    StackNavigationProp,
-    TransitionPresets,
-} from "@react-navigation/stack";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import {
-    SafeAreaView,
-    View,
-    Text,
-    StyleSheet,
-    Platform,
-    StatusBar,
-    ScrollView,
-    RefreshControl,
-    FlatList,
-} from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
 import { Avatar, Card, FAB, Paragraph, useTheme } from "react-native-paper";
 import { RootStackParamList } from "../../App";
 import CategoryTiles from "../components/CategoryTiles";
-import FoodDraw from "./FoodDraw";
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, "CheckIn">;
 export type HomeStackParamList = {
