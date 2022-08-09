@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, SafeAreaView } from "react-native";
+import { Divider } from "react-native-paper";
 import ExpiryCard from "../components/ExpiryCard";
 
 const wait = (timeout: number) => {
@@ -40,6 +41,10 @@ const ExpiringScreen = () => {
                         new Date(b.expiry).getTime()
                     );
                 })}
+                keyExtractor={(item) => item.food}
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                ItemSeparatorComponent={() => <Divider bold leftInset />}
                 renderItem={(data) => (
                     <ExpiryCard
                         food={data.item.food}

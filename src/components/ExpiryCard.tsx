@@ -1,6 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Card, List, Text, useTheme } from "react-native-paper";
+import {
+    Avatar,
+    Card,
+    List,
+    Text,
+    TouchableRipple,
+    useTheme,
+} from "react-native-paper";
 
 const styles = StyleSheet.create({
     cardCircle: {
@@ -72,24 +79,16 @@ function ExpiryCard(props: { food: string; expiry: Date }) {
     }
 
     return (
-        <Card key={props.food} elevation={1} style={styles.cardCircle}>
-            <Card.Title
+        <TouchableRipple onPress={() => console.log("Pressed")}>
+            <List.Item
                 title={props.food}
-                titleVariant={"titleLarge"}
-                subtitle={"Quantity: " + Math.floor(Math.random() * 100)}
-                subtitleVariant={"labelMedium"}
-                subtitleStyle={{ color: colors.outline }}
+                description="<food descript>"
                 left={(props) => (
-                    <Avatar.Icon {...props} icon="fruit-watermelon" />
+                    <List.Icon {...props} icon="fruit-watermelon" />
                 )}
                 right={(props) => icon}
             />
-            {/* <Card.Content>
-                <Paragraph>
-                    This is a card with a title, subtitle, and image.
-                </Paragraph>
-            </Card.Content> */}
-        </Card>
+        </TouchableRipple>
     );
 }
 

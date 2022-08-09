@@ -2,22 +2,18 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import {
-    SafeAreaView,
-    View,
-    Text,
-    StyleSheet,
-    Platform,
-    StatusBar,
-    ScrollView,
-    RefreshControl,
     FlatList,
-    Modal,
+    RefreshControl,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
 import {
-    Avatar,
-    Card,
+    Divider,
     FAB,
-    Paragraph,
+    List,
+    Modal,
     TouchableRipple,
     useTheme,
 } from "react-native-paper";
@@ -96,8 +92,6 @@ const FoodSpaces = () => {
                         onRefresh={onRefresh}
                     />
                 }
-                ItemSeparatorComponent={() => <View style={styles.separator} />}
-                ListFooterComponent={() => <View style={styles.separator} />}
                 ListHeaderComponent={
                     <View>
                         <CategoryTiles
@@ -107,27 +101,20 @@ const FoodSpaces = () => {
                         />
                     </View>
                 }
+                ItemSeparatorComponent={() => <Divider bold leftInset />}
+                keyExtractor={(item) => item.food}
                 renderItem={(data) => (
-                    <TouchableRipple onPress={showModal}>
-                        <Card
-                            key={data.item.food}
-                            elevation={2}
-                            style={styles.cardCircle}
-                            onPress={showModal}
-                        >
-                            <Card.Title
-                                title={data.item.food}
-                                left={(props) => (
-                                    <Avatar.Icon {...props} icon="apple" />
-                                )}
-                            />
-                            <Card.Content>
-                                <Paragraph>
-                                    This is a card with a title, subtitle, and
-                                    image.
-                                </Paragraph>
-                            </Card.Content>
-                        </Card>
+                    <TouchableRipple onPress={() => console.log("Pressed")}>
+                        <List.Item
+                            title={data.item.food}
+                            description="<food descript>"
+                            left={(props) => (
+                                <List.Icon {...props} icon="fruit-watermelon" />
+                            )}
+                            right={(props) => (
+                                <List.Icon {...props} icon="chevron-right" />
+                            )}
+                        />
                     </TouchableRipple>
                 )}
             />
@@ -141,10 +128,12 @@ const FoodSpaces = () => {
                     navigation.navigate("CheckIn");
                 }}
             />
-            <Modal visible={visible} onDismiss={hideModal}>
-                <Paragraph>
-                    This is a card with a title, subtitle, and image.
-                </Paragraph>
+            <Modal
+                visible={visible}
+                onDismiss={hideModal}
+                contentContainerStyle={containerStyle}
+            >
+                <Text>Example Modal. Click outside this area to dismiss.</Text>
             </Modal>
         </SafeAreaView>
     );
@@ -159,14 +148,19 @@ const styles = StyleSheet.create({
     },
     cardCircle: {
         borderRadius: 14,
+        marginVertical: 5,
         marginHorizontal: 10,
-        elevation: 2,
     },
     separator: {
         margin: 5,
     },
 });
 
-const containerStyle = { backgroundColor: "white", padding: 20 };
+const containerStyle = {
+    backgroundColor: "white",
+    padding: 20,
+    margin: 30,
+    height: "60%",
+};
 
 export default HomeScreen;

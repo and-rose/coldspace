@@ -1,21 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef } from "react";
-import {
-    View,
-    StyleSheet,
-    TouchableHighlight,
-    RefreshControl,
-    FlatList,
-} from "react-native";
-import {
-    Chip,
-    Surface,
-    Text,
-    TouchableRipple,
-    useTheme,
-} from "react-native-paper";
-import { FlatGrid } from "react-native-super-grid";
-import { FoodInfo } from "../screens/Home";
+import { FlatList } from "react-native";
+import { Chip, Divider, Searchbar, useTheme } from "react-native-paper";
 
 function CategoryTiles(props: {
     data: any[];
@@ -27,6 +12,7 @@ function CategoryTiles(props: {
     }>({});
     const [activeIndexes, setActiveIndexes] = React.useState<number[]>([]);
     const flatListRef = useRef<FlatList>(null);
+    const theme = useTheme();
 
     //THIS IS REALLY WEIRD WITH THE DATA STUFF
     useEffect(() => {
@@ -60,28 +46,43 @@ function CategoryTiles(props: {
         }
     }
 
+    const [searchQuery, setSearchQuery] = React.useState("");
+
+    const onChangeSearch = (query: string) => setSearchQuery(query);
+
     return (
-        <FlatList
-            horizontal={true}
-            data={Object.keys(categoryCounts)}
-            showsHorizontalScrollIndicator={false}
-            ref={flatListRef}
-            contentContainerStyle={{
-                marginVertical: 5,
-            }}
-            renderItem={({ item, index }) => (
-                <Chip
-                    selected={activeIndexes.includes(index)}
-                    elevated
-                    style={{
-                        margin: 5,
-                    }}
-                    onPress={() => handleCategoryTap(index, item)}
-                >
-                    {item}
-                </Chip>
-            )}
-        />
+        <>
+            <Searchbar
+                placeholder="Search..."
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+                placeholderTextColor={"#b1b1b1"}
+            />
+            <FlatList
+                horizontal={true}
+                data={Object.keys(categoryCounts)}
+                showsHorizontalScrollIndicator={false}
+                ref={flatListRef}
+                contentContainerStyle={{
+                    paddingVertical: 5,
+                    backgroundColor: theme.colors.primaryContainer,
+                }}
+                renderItem={({ item, index }) => (
+                    <Chip
+                        selected={activeIndexes.includes(index)}
+                        style={{
+                            margin: 5,
+                        }}
+                        mode="outlined"
+                        elevated
+                        onPress={() => handleCategoryTap(index, item)}
+                    >
+                        {item}
+                    </Chip>
+                )}
+            />
+            <Divider bold />
+        </>
     );
 }
 

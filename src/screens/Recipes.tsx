@@ -1,13 +1,12 @@
 import React from "react";
 import {
-    SafeAreaView,
-    View,
-    Text,
-    StyleSheet,
     FlatList,
     RefreshControl,
+    SafeAreaView,
+    StyleSheet,
+    View,
 } from "react-native";
-import { Avatar, Card, Paragraph } from "react-native-paper";
+import { List, TouchableRipple } from "react-native-paper";
 import CategoryTiles from "../components/CategoryTiles";
 
 const Recipes = [
@@ -60,6 +59,7 @@ const RecipesScreen = () => {
                 }
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
                 ListFooterComponent={() => <View style={styles.separator} />}
+                keyExtractor={(item) => item.recipe}
                 ListHeaderComponent={
                     <View>
                         <CategoryTiles
@@ -70,24 +70,18 @@ const RecipesScreen = () => {
                     </View>
                 }
                 renderItem={(data) => (
-                    <Card
-                        key={data.item.recipe}
-                        elevation={2}
-                        style={styles.cardCircle}
-                    >
-                        <Card.Title
+                    <TouchableRipple onPress={() => console.log("Pressed")}>
+                        <List.Item
                             title={data.item.recipe}
+                            description="<recipe descript>"
                             left={(props) => (
-                                <Avatar.Icon {...props} icon="apple" />
+                                <List.Icon {...props} icon="food" />
+                            )}
+                            right={(props) => (
+                                <List.Icon {...props} icon="chevron-right" />
                             )}
                         />
-                        <Card.Content>
-                            <Paragraph>
-                                This is a card with a title, subtitle, and
-                                image.
-                            </Paragraph>
-                        </Card.Content>
-                    </Card>
+                    </TouchableRipple>
                 )}
             />
         </SafeAreaView>
