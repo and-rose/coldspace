@@ -10,7 +10,7 @@ import {
 import { Avatar, Card, Paragraph } from "react-native-paper";
 import CategoryTiles from "../components/CategoryTiles";
 
-const recipes = [
+const Recipes = [
     { recipe: "Waffles", category: "Breakfast" },
     { recipe: "Omelette", category: "Breakfast" },
     { recipe: "Pizza", category: "Lunch" },
@@ -37,7 +37,6 @@ const wait = (timeout: number) => {
 const RecipesScreen = () => {
     const [refreshing, setRefreshing] = React.useState(false);
     const [filters, setFilters] = React.useState<string[]>([]);
-    const [data, setData] = React.useState(recipes);
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         wait(500).then(() => setRefreshing(false));
@@ -45,18 +44,13 @@ const RecipesScreen = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View>
-                <CategoryTiles
-                    data={recipes}
-                    setFilters={setFilters}
-                    filters={filters}
-                />
-            </View>
             <FlatList
                 data={
                     filters.length > 0
-                        ? data.filter((food) => filters.includes(food.category))
-                        : data
+                        ? Recipes.filter((food) =>
+                              filters.includes(food.category)
+                          )
+                        : Recipes
                 }
                 refreshControl={
                     <RefreshControl
@@ -65,6 +59,16 @@ const RecipesScreen = () => {
                     />
                 }
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
+                ListFooterComponent={() => <View style={styles.separator} />}
+                ListHeaderComponent={
+                    <View>
+                        <CategoryTiles
+                            data={Recipes}
+                            setFilters={setFilters}
+                            filters={filters}
+                        />
+                    </View>
+                }
                 renderItem={(data) => (
                     <Card
                         key={data.item.recipe}

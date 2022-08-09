@@ -69,8 +69,7 @@ const FoodSpaces = () => {
     const theme = useTheme();
     const navigation = useNavigation<homeScreenProp>();
     const [refreshing, setRefreshing] = React.useState(false);
-    const [filters, setFilter] = React.useState<string[]>([]);
-    const [foods, setFoods] = React.useState<FoodInfo[]>(Foods);
+    const [filters, setFilters] = React.useState<string[]>([]);
     const [visible, setVisible] = React.useState(false);
 
     const showModal = () => setVisible(true);
@@ -83,13 +82,6 @@ const FoodSpaces = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View>
-                <CategoryTiles
-                    data={foods}
-                    setFilters={setFilter}
-                    filters={filters}
-                />
-            </View>
             <FlatList
                 data={
                     filters.length > 0
@@ -105,6 +97,16 @@ const FoodSpaces = () => {
                     />
                 }
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
+                ListFooterComponent={() => <View style={styles.separator} />}
+                ListHeaderComponent={
+                    <View>
+                        <CategoryTiles
+                            data={Foods}
+                            setFilters={setFilters}
+                            filters={filters}
+                        />
+                    </View>
+                }
                 renderItem={(data) => (
                     <TouchableRipple onPress={showModal}>
                         <Card
