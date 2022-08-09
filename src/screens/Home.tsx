@@ -11,8 +11,16 @@ import {
     ScrollView,
     RefreshControl,
     FlatList,
+    Modal,
 } from "react-native";
-import { Avatar, Card, FAB, Paragraph, useTheme } from "react-native-paper";
+import {
+    Avatar,
+    Card,
+    FAB,
+    Paragraph,
+    TouchableRipple,
+    useTheme,
+} from "react-native-paper";
 import { RootStackParamList } from "../../App";
 import CategoryTiles from "../components/CategoryTiles";
 
@@ -131,11 +139,7 @@ const FoodSpaces = () => {
                     navigation.navigate("CheckIn");
                 }}
             />
-            <Modal
-                visible={visible}
-                contentContainerStyle={containerStyle}
-                onDismiss={hideModal}
-            >
+            <Modal visible={visible} onDismiss={hideModal}>
                 <Paragraph>
                     This is a card with a title, subtitle, and image.
                 </Paragraph>

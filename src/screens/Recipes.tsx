@@ -1,5 +1,12 @@
 import React from "react";
-import { SafeAreaView, View, Text, StyleSheet, FlatList } from "react-native";
+import {
+    SafeAreaView,
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    RefreshControl,
+} from "react-native";
 import { Avatar, Card, Paragraph } from "react-native-paper";
 import CategoryTiles from "../components/CategoryTiles";
 
