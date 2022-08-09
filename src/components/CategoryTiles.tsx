@@ -1,6 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import { FlatList } from "react-native";
-import { Chip } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect } from "react";
+import {
+    View,
+    StyleSheet,
+    TouchableHighlight,
+    RefreshControl,
+} from "react-native";
+import { Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
+import { FlatGrid } from "react-native-super-grid";
+import { FoodInfo } from "../screens/Home";
 
 function CategoryTiles(props: {
     data: any[];

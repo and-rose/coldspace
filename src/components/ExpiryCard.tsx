@@ -1,6 +1,6 @@
 import React from "react";
-import { Avatar, Card, List, useTheme, Text } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Avatar, Card, List, Text, useTheme } from "react-native-paper";
 
 const styles = StyleSheet.create({
     cardCircle: {

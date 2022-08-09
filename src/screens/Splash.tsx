@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native-paper";
-import { View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Text, useTheme } from "react-native-paper";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
+import { ActivityIndicator, Text, useTheme } from "react-native-paper";
 
 const Splash = (props: any) => {
     const [appIsReady, setAppIsReady] = useState(false);

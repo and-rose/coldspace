@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import React, { useEffect, useState } from "react";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import CameraOverlay from "../components/CameraOverlay";
 
 function CheckIn() {

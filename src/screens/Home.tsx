@@ -4,19 +4,15 @@ import React from "react";
 import {
     SafeAreaView,
     View,
+    Text,
     StyleSheet,
+    Platform,
+    StatusBar,
+    ScrollView,
     RefreshControl,
     FlatList,
 } from "react-native";
-import {
-    Avatar,
-    Card,
-    FAB,
-    Modal,
-    Paragraph,
-    TouchableRipple,
-    useTheme,
-} from "react-native-paper";
+import { Avatar, Card, FAB, Paragraph, useTheme } from "react-native-paper";
 import { RootStackParamList } from "../../App";
 import CategoryTiles from "../components/CategoryTiles";
 
