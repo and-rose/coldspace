@@ -1,38 +1,19 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useEffect } from "react";
-import {
-    View,
-    StyleSheet,
-    TouchableHighlight,
-    RefreshControl,
-} from "react-native";
-import { Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
-import { FlatGrid } from "react-native-super-grid";
-import { FoodInfo } from "../screens/Home";
+import React, { useEffect, useRef } from "react";
+import { FlatList } from "react-native";
+import { Chip } from "react-native-paper";
 
-const styles = StyleSheet.create({
-    surface: {
-        flex: 1,
-        width: 130,
-        borderRadius: 8,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
-
-const wait = (timeout: number) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
-};
-
-function CategoryTiles(props: { data: any[] }) {
-    const theme = useTheme();
-    const navigation = useNavigation();
-    const [refreshing, setRefreshing] = React.useState(false);
+function CategoryTiles(props: {
+    data: any[];
+    setFilters: (p: string[]) => void;
+    filters: string[];
+}) {
     const [categoryCounts, setCategoryCounts] = React.useState<{
         [category: string]: number;
     }>({});
+    const [activeIndexes, setActiveIndexes] = React.useState<number[]>([]);
+    const flatListRef = useRef<FlatList>(null);
 
+    //THIS IS REALLY WEIRD WITH THE DATA STUFF
     useEffect(() => {
         const uniqueCategories = [
             ...new Set(props.data.map((a: { category: string }) => a.category)),
@@ -51,53 +32,40 @@ function CategoryTiles(props: { data: any[] }) {
         setCategoryCounts(uniqueCategoriesCounts);
     }, [props.data]);
 
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        wait(500).then(() => setRefreshing(false));
-    }, []);
+    function handleCategoryTap(index: number, item: string) {
+        if (activeIndexes.includes(index)) {
+            setActiveIndexes([...activeIndexes.filter((i) => i !== index)]);
+        } else {
+            setActiveIndexes([...activeIndexes, index]);
+        }
+        if (props.filters.includes(item)) {
+            props.setFilters(props.filters.filter((f) => f !== item));
+        } else {
+            props.setFilters([...props.filters, item]);
+        }
+    }
 
     return (
-        <FlatGrid
-            itemDimension={110}
-            spacing={10}
+        <FlatList
             horizontal={true}
             data={Object.keys(categoryCounts)}
-            renderItem={({ item }) => (
-                <View style={{ paddingTop: 2, paddingLeft: 2 }}>
-                    <Surface style={styles.surface}>
-                        <TouchableRipple
-                            rippleColor="rgba(0, 0, 0, .05)"
-                            onPress={() => {
-                                console.log(`pressed${item}`);
-                            }}
-                            style={{
-                                display: "flex",
-                                width: "100%",
-                                height: "100%",
-                            }}
-                        >
-                            <View
-                                style={{
-                                    flex: 1,
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Text variant="titleLarge">{item}</Text>
-                                <Text
-                                    variant="bodyMedium"
-                                    style={{ color: theme.colors.outline }}
-                                >
-                                    {categoryCounts[item]} items
-                                </Text>
-                            </View>
-                        </TouchableRipple>
-                    </Surface>
-                </View>
+            showsHorizontalScrollIndicator={false}
+            ref={flatListRef}
+            contentContainerStyle={{
+                marginVertical: 5,
+            }}
+            renderItem={({ item, index }) => (
+                <Chip
+                    selected={activeIndexes.includes(index)}
+                    elevated
+                    style={{
+                        margin: 5,
+                    }}
+                    onPress={() => handleCategoryTap(index, item)}
+                >
+                    {item}
+                </Chip>
             )}
-            refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
         />
     );
 }

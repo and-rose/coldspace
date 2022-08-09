@@ -1,11 +1,12 @@
 import React from "react";
 import { View } from "react-native";
 import { Text } from "react-native-paper";
+import { FoodInfo } from "./Home";
 
-function FoodDraw() {
+function FoodDraw(props: { data: FoodInfo }) {
     return (
         <View>
-            <Text>FoodDraw</Text>
+            <Text>{props.data.food}</Text>
         </View>
     );
 }

@@ -32,13 +32,14 @@ const theme = {
     colors: {
         ...CombinedDefaultTheme.colors,
         primary: "#A2D2FF",
+        primaryContainer: "#b8dcfd",
         primaryAlt: "#52a7f7",
-        primaryContainer: "#A2D2FF",
-        secondary: "#FFC8DD",
-        secondaryContainer: "#A2D2FF",
+        secondary: "#BDE0FE",
+        secondaryContainer: "#d1e9ff",
+        surface: "#FFFFFF",
         error: "#fa7676",
         warning: "#ffc46b",
-        tertiary: "#CDB4DB",
+        tertiary: "#b0d9ff",
     },
 };
 
