@@ -14,7 +14,6 @@ function CategoryTiles(props: {
     const flatListRef = useRef<FlatList>(null);
     const theme = useTheme();
 
-    //THIS IS REALLY WEIRD WITH THE DATA STUFF
     useEffect(() => {
         const uniqueCategories = [
             ...new Set(props.data.map((a: { category: string }) => a.category)),

@@ -1,15 +1,20 @@
-import { createMaterialBottomTabNavigator } from "@juliushuck/react-native-navigation-material-bottom-tabs";
 import React from "react";
 import Expiring from "../screens/Expiring";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Recipes from "../screens/Recipes";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export const BottomTabs = () => {
     return (
-        <Tab.Navigator initialRouteName="Home" shifting={true}>
+        <Tab.Navigator
+            initialRouteName="Home"
+            shifting={true}
+            barStyle={{ backgroundColor: "#fff" }}
+        >
             <Tab.Screen
                 name="Foodspace"
                 component={Home}

@@ -36,7 +36,6 @@ const theme = {
         primaryAlt: "#52a7f7",
         secondary: "#BDE0FE",
         secondaryContainer: "#d1e9ff",
-        surface: "#FFFFFF",
         error: "#fa7676",
         warning: "#ffc46b",
         tertiary: "#b0d9ff",

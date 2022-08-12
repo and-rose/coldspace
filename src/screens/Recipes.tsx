@@ -6,7 +6,7 @@ import {
     StyleSheet,
     View,
 } from "react-native";
-import { List, TouchableRipple } from "react-native-paper";
+import { Divider, List, TouchableRipple } from "react-native-paper";
 import CategoryTiles from "../components/CategoryTiles";
 
 const Recipes = [
@@ -57,7 +57,7 @@ const RecipesScreen = () => {
                         onRefresh={onRefresh}
                     />
                 }
-                ItemSeparatorComponent={() => <View style={styles.separator} />}
+                ItemSeparatorComponent={() => <Divider bold leftInset />}
                 ListFooterComponent={() => <View style={styles.separator} />}
                 keyExtractor={(item) => item.recipe}
                 ListHeaderComponent={
