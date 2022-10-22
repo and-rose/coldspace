@@ -17,7 +17,12 @@ const styles = StyleSheet.create({
     },
 });
 
-function ExpiryCard(props: { food: string; expiry: Date }) {
+function ExpiryCard(props: {
+    food: string;
+    expiry: Date;
+    icon: string;
+    quantity: number;
+}) {
     const { colors } = useTheme();
     const timeDiff = props.expiry.getTime() - new Date().getTime();
     const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
@@ -82,9 +87,9 @@ function ExpiryCard(props: { food: string; expiry: Date }) {
         <TouchableRipple onPress={() => console.log("Pressed")}>
             <List.Item
                 title={props.food}
-                description="<food descript>"
-                left={(props) => (
-                    <List.Icon {...props} icon="fruit-watermelon" />
+                description={`Quantity: ${props.quantity}`}
+                left={(smallProps) => (
+                    <List.Icon {...smallProps} icon={props.icon} />
                 )}
                 right={(props) => icon}
             />

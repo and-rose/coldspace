@@ -18,6 +18,7 @@ import {
     useTheme,
 } from "react-native-paper";
 import { RootStackParamList } from "../../App";
+import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import CategoryTiles from "../components/CategoryTiles";
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, "CheckIn">;
@@ -36,29 +37,111 @@ const wait = (timeout: number) => {
 
 export type FoodInfo = {
     food: string;
-    expiry: String;
+    expiry: string;
     category: string;
+    quantity: number;
+    icon: keyof typeof MaterialCommunityIcons.glyphMap;
 };
 
-const Foods: FoodInfo[] = [
-    { food: "apple", expiry: "2022-08-05", category: "Fruit" },
-    { food: "banana", expiry: "2022-08-15", category: "Fruit" },
-    { food: "orange", expiry: "2022-08-18", category: "Fruit" },
-    { food: "carrot", expiry: "2022-08-20", category: "Vegetable" },
-    { food: "potato", expiry: "2022-08-25", category: "Vegetable" },
-    { food: "tomato", expiry: "2022-08-30", category: "Vegetable" },
-    { food: "chicken", expiry: "2022-08-30", category: "Meat" },
-    { food: "beef", expiry: "2022-08-30", category: "Meat" },
-    { food: "pork", expiry: "2022-08-30", category: "Meat" },
-    { food: "fish", expiry: "2022-08-30", category: "Fish" },
-    { food: "milk", expiry: "2022-08-30", category: "Dairy" },
-    { food: "cheese", expiry: "2022-08-30", category: "Dairy" },
-    { food: "bread", expiry: "2022-08-30", category: "Bread" },
-    { food: "pasta", expiry: "2022-08-30", category: "Pasta" },
-    { food: "rice", expiry: "2022-08-30", category: "Rice" },
-    { food: "soup", expiry: "2022-08-30", category: "Soup" },
-    { food: "sushi", expiry: "2022-08-30", category: "Sushi" },
-    { food: "pizza", expiry: "2022-08-30", category: "Pizza" },
+export const Foods: FoodInfo[] = [
+    {
+        food: "apple",
+        expiry: "2022-10-05",
+        category: "Fruit",
+        quantity: 1,
+        icon: "food-apple",
+    },
+    {
+        food: "banana",
+        expiry: "2022-10-15",
+        category: "Fruit",
+        quantity: 3,
+        icon: "food",
+    },
+    {
+        food: "lemon",
+        expiry: "2022-10-18",
+        category: "Fruit",
+        quantity: 2,
+        icon: "fruit-citrus",
+    },
+    {
+        food: "carrot",
+        expiry: "2022-10-20",
+        category: "Vegetable",
+        quantity: 6,
+        icon: "carrot",
+    },
+    {
+        food: "bread",
+        expiry: "2022-10-25",
+        category: "Bread",
+        quantity: 4,
+        icon: "baguette",
+    },
+    {
+        food: "cheese",
+        expiry: "2022-10-30",
+        category: "Vegetable",
+        quantity: 5,
+        icon: "cheese",
+    },
+    {
+        food: "chicken",
+        expiry: "2022-10-30",
+        category: "Meat",
+        quantity: 5,
+        icon: "food-drumstick",
+    },
+    {
+        food: "eggs",
+        expiry: "2022-10-30",
+        category: "Meat",
+        quantity: 1,
+        icon: "egg",
+    },
+    {
+        food: "steak",
+        expiry: "2022-10-30",
+        category: "Meat",
+        quantity: 2,
+        icon: "food-steak",
+    },
+    {
+        food: "fish",
+        expiry: "2022-10-30",
+        category: "Fish",
+        quantity: 3,
+        icon: "fish",
+    },
+    {
+        food: "milk",
+        expiry: "2022-10-30",
+        category: "Dairy",
+        quantity: 1,
+        icon: "blender",
+    },
+    {
+        food: "pasta",
+        expiry: "2022-10-30",
+        category: "Pasta",
+        quantity: 1,
+        icon: "pasta",
+    },
+    {
+        food: "rice",
+        expiry: "2022-10-30",
+        category: "Rice",
+        quantity: 1,
+        icon: "rice",
+    },
+    {
+        food: "soup",
+        expiry: "2022-10-30",
+        category: "Soup",
+        quantity: 1,
+        icon: "bowl",
+    },
 ];
 
 const FoodSpaces = () => {
@@ -107,9 +190,10 @@ const FoodSpaces = () => {
                     <TouchableRipple onPress={() => console.log("Pressed")}>
                         <List.Item
                             title={data.item.food}
-                            description="<food descript>"
+                            key={data.item.food}
+                            description={`Quantity: ${data.item.quantity}`}
                             left={(props) => (
-                                <List.Icon {...props} icon="fruit-watermelon" />
+                                <List.Icon {...props} icon={data.item.icon} />
                             )}
                             right={(props) => (
                                 <List.Icon {...props} icon="chevron-right" />

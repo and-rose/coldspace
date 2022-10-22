@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, SafeAreaView } from "react-native";
 import { Divider } from "react-native-paper";
 import ExpiryCard from "../components/ExpiryCard";
+import { Foods } from "./Home";
 
 const wait = (timeout: number) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -14,23 +15,6 @@ const ExpiringScreen = () => {
         setRefreshing(true);
         wait(500).then(() => setRefreshing(false));
     }, []);
-
-    const Foods = [
-        { food: "apple", expiry: "2022-08-05" },
-        { food: "banana", expiry: "2022-08-15" },
-        { food: "orange", expiry: "2022-08-18" },
-        { food: "grape", expiry: "2022-08-11" },
-        { food: "pear", expiry: "2022-08-14" },
-        { food: "cherry", expiry: "2022-08-17" },
-        { food: "strawberry", expiry: "2022-08-10" },
-        { food: "kiwi", expiry: "2022-08-13" },
-        { food: "mango", expiry: "2022-08-16" },
-        { food: "watermelon", expiry: "2022-08-19" },
-        { food: "pineapple", expiry: "2022-08-12" },
-        { food: "peach", expiry: "2022-08-15" },
-        { food: "apricot", expiry: "2022-08-18" },
-        { food: "avocado", expiry: "2022-08-11" },
-    ];
 
     return (
         <SafeAreaView>
@@ -48,6 +32,8 @@ const ExpiringScreen = () => {
                 renderItem={(data) => (
                     <ExpiryCard
                         food={data.item.food}
+                        icon={data.item.icon}
+                        quantity={data.item.quantity}
                         expiry={new Date(data.item.expiry)}
                         key={data.item.food}
                     />
